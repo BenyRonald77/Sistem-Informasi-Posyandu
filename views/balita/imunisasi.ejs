@@ -1,0 +1,59 @@
+<a class="tautan-kembali" href="/balita/<%= balita.id %>">Kembali ke Detail Balita</a>
+
+<div class="header-halaman">
+  <h1>Jadwal Imunisasi - <%= balita.nama %></h1>
+  <p class="subjudul">Usia sekarang <%= formatUsiaDariBulan(usiaBulan) %>. Daftar berikut mengikuti jadwal imunisasi dasar lengkap program pemerintah Indonesia.</p>
+</div>
+
+<div class="kartu">
+  <div class="pembungkus-tabel">
+    <table class="tabel-data">
+      <thead>
+        <tr>
+          <th>Imunisasi</th>
+          <th class="angka">Usia Rekomendasi</th>
+          <th>Status</th>
+          <th>Tanggal Pemberian</th>
+          <th>Catat / Ubah</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% daftar.forEach(function(item) { %>
+          <tr>
+            <td>
+              <%= item.nama %>
+              <% if (item.keterangan) { %><div class="teks-muram teks-kecil"><%= item.keterangan %></div><% } %>
+            </td>
+            <td class="angka"><%= item.usiaRekomendasiBulan %> bulan</td>
+            <td>
+              <% if (item.statusTampil === 'sudah') { %>
+                <span class="status-badge status-sudah">Sudah diberikan</span>
+              <% } else if (item.statusTampil === 'terlambat') { %>
+                <span class="status-badge status-terlambat">Terlambat</span>
+              <% } else if (item.statusTampil === 'jatuh-tempo-dekat') { %>
+                <span class="status-badge status-jatuh-tempo-dekat">Jatuh tempo dekat</span>
+              <% } else { %>
+                <span class="status-badge status-belum-waktunya">Belum waktunya</span>
+              <% } %>
+            </td>
+            <td><%= item.tanggalPemberian ? formatTanggal(item.tanggalPemberian) : '-' %></td>
+            <td>
+              <% if (item.status === 'sudah') { %>
+                <form method="post" action="/balita/<%= balita.id %>/imunisasi/<%= item.kode %>" style="display:flex; gap:6px; align-items:center; flex-wrap: wrap;">
+                  <input type="hidden" name="status" value="belum">
+                  <button type="submit" class="tombol tombol-kecil tombol-luar">Tandai Belum</button>
+                </form>
+              <% } else { %>
+                <form method="post" action="/balita/<%= balita.id %>/imunisasi/<%= item.kode %>" style="display:flex; gap:6px; align-items:center; flex-wrap: wrap;">
+                  <input type="hidden" name="status" value="sudah">
+                  <input type="date" name="tanggalPemberian" value="<%= new Date().toISOString().slice(0,10) %>" max="<%= new Date().toISOString().slice(0,10) %>" aria-label="Tanggal pemberian <%= item.nama %>" style="min-width:150px;">
+                  <button type="submit" class="tombol tombol-kecil tombol-primer">Tandai Sudah</button>
+                </form>
+              <% } %>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</div>

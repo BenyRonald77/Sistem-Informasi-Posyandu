@@ -20,5 +20,9 @@
       <span class="angka"><%= jumlahKeluarga %></span>
       <span class="label">Keluarga aktif</span>
     </div>
+    <div class="kartu-statistik <%= jumlahBalitaTerlambatImunisasi > 0 ? 'aksen' : '' %>">
+      <span class="angka"><%= jumlahBalitaTerlambatImunisasi %></span>
+      <span class="label">Balita dengan imunisasi terlambat</span>
+    </div>
   </div>
 <% } %>

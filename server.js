@@ -6,6 +6,7 @@ const routeDashboard = require('./routes/dashboard');
 const routeKeluarga = require('./routes/keluarga');
 const routeBalita = require('./routes/balita');
 const routeGrafik = require('./routes/grafik');
+const routeImunisasi = require('./routes/imunisasi');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -28,6 +29,7 @@ app.use('/', routeDashboard);
 app.use('/keluarga', routeKeluarga);
 app.use('/balita', routeBalita);
 app.use('/balita', routeGrafik);
+app.use('/balita', routeImunisasi);
 
 app.use((req, res) => {
   res.status(404).render('error', {
