@@ -39,14 +39,16 @@ abu-abu garis) tidak dihitung sebagai warna inti.
 | Inti 1 - Teal Posyandu (primer) | `#0F6E5C` | Hijau-teal tua dipilih karena diasosiasikan dengan kesehatan dan pertumbuhan (bukan biru korporat rumah sakit yang dingin, bukan hijau muda yang kekanak-kanakan). Dipakai untuk navigasi aktif, judul bagian, dan elemen struktural utama. |
 | Inti 2 - Krem Kertas (latar) | `#FBF6EE` | Latar belakang hangat, bukan putih steril, meniru kesan kertas KMS/buku KIA yang biasa dipegang kader dan orang tua sehari-hari. Mengurangi kesan "aplikasi korporat dingin". |
 | Inti 3 - Tinta Hangat (teks) | `#2B2420` | Coklat tua-kehitaman, bukan hitam pekat, supaya kontras tetap tinggi (di atas 4.5:1 pada latar krem) tapi terasa lebih hangat dibanding teks hitam murni khas dashboard SaaS. |
-| Aksen - Terakota (tindakan/penting) | `#C4562A` | Dipakai HANYA untuk tombol aksi utama, tanda "jatuh tempo"/perlu perhatian, dan sorot penting lain. Warna hangat (bukan merah alarm, bukan oranye neon) supaya terasa mengundang tindakan tanpa terkesan darurat/menakutkan bagi orang tua yang membaca pengingat imunisasi anaknya. |
+| Aksen - Terakota (tindakan/penting) | `#BB4C20` | Dipakai HANYA untuk tombol aksi utama, tanda "jatuh tempo"/perlu perhatian, dan sorot penting lain. Warna hangat (bukan merah alarm, bukan oranye neon) supaya terasa mengundang tindakan tanpa terkesan darurat/menakutkan bagi orang tua yang membaca pengingat imunisasi anaknya. Nilai disesuaikan dari draf awal (`#C4562A`) supaya teks putih di atasnya memenuhi kontras WCAG AA 4.5:1 (R-25). |
 
 Warna status (fungsional, bukan dekoratif, mengikuti kebutuhan data, bukan
 menambah jumlah warna inti karena tiap warna menandai kondisi nyata):
 `--status-sudah` hijau `#1E7A34` (imunisasi sudah diberikan / gizi normal),
 `--status-jatuh-tempo` terakota aksen di atas (jatuh tempo dekat),
 `--status-terlambat` merah bata `#B23A2E` (imunisasi terlambat / hasil ukur
-perlu perhatian), `--status-belum` abu netral `#8A8378` (belum waktunya).
+perlu perhatian), `--status-belum` abu netral gelap `#5C5548` (belum
+waktunya, disesuaikan lebih gelap dari draf awal supaya teks badge tetap
+lolos kontras AA di atas latar abu terangnya).
 
 ## Tipografi
 

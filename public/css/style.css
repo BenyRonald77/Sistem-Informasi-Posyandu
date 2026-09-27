@@ -9,8 +9,8 @@
   --warna-primer-gelap: #0a4f42;
   --warna-kertas: #fbf6ee;
   --warna-tinta: #2b2420;
-  --warna-aksen: #c4562a;
-  --warna-aksen-gelap: #a3441e;
+  --warna-aksen: #bb4c20;
+  --warna-aksen-gelap: #96391a;
 
   /* Netral (tidak dihitung sebagai warna inti) */
   --netral-garis: #ded4c2;
@@ -25,7 +25,7 @@
   --status-jatuh-tempo-bg: #f8e7dc;
   --status-terlambat: #b23a2e;
   --status-terlambat-bg: #f8e0dd;
-  --status-belum: #8a8378;
+  --status-belum: #5c5548;
   --status-belum-bg: #efeae0;
 
   --radius-sm: 6px;
