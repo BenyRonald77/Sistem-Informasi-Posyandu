@@ -1,0 +1,38 @@
+<div class="header-halaman">
+  <div class="baris-aksi">
+    <div>
+      <h1>Data Balita</h1>
+      <p class="subjudul">Seluruh balita yang terdaftar di posyandu ini.</p>
+    </div>
+    <a class="tombol tombol-primer" href="/balita/baru">Tambah Balita</a>
+  </div>
+</div>
+
+<% if (daftar.length === 0) { %>
+  <div class="state-kosong">
+    <h3>Belum ada balita terdaftar</h3>
+    <p class="teks-muram">Daftarkan keluarga terlebih dahulu, lalu tambahkan data balitanya di sini.</p>
+    <a class="tombol tombol-primer" href="/balita/baru">Tambah Balita</a>
+  </div>
+<% } else { %>
+  <div class="kartu">
+    <div class="pembungkus-tabel">
+      <table class="tabel-data">
+        <thead>
+          <tr><th>Nama</th><th>Keluarga</th><th>Jenis Kelamin</th><th class="angka">Usia</th><th></th></tr>
+        </thead>
+        <tbody>
+          <% daftar.forEach(function(b) { %>
+            <tr>
+              <td><%= b.nama %></td>
+              <td><%= b.namaKeluarga %></td>
+              <td><%= b.jenisKelamin === 'L' ? 'Laki-laki' : 'Perempuan' %></td>
+              <td class="angka"><%= formatUsiaDariBulan(b.usiaBulan) %></td>
+              <td><a href="/balita/<%= b.id %>">Lihat detail</a></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% } %>

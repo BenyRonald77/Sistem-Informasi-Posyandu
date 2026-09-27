@@ -1,0 +1,44 @@
+<a class="tautan-kembali" href="/balita">Kembali ke Data Balita</a>
+<h1><%= title %></h1>
+
+<% if (errors && errors.length) { %>
+  <div class="state-galat" role="alert">
+    <h3>Data belum tersimpan</h3>
+    <ul style="text-align:left; margin: 0;">
+      <% errors.forEach(function(e) { %><li><%= e %></li><% }); %>
+    </ul>
+  </div>
+<% } %>
+
+<div class="kartu">
+  <form method="post" action="<%= balita && balita.id ? '/balita/' + balita.id : '/balita' %>">
+    <div class="grup-form">
+      <label for="keluargaId">Keluarga</label>
+      <select id="keluargaId" name="keluargaId" required>
+        <option value="">Pilih keluarga</option>
+        <% semuaKeluarga.forEach(function(k) { %>
+          <option value="<%= k.id %>" <%= keluargaIdTerpilih === k.id ? 'selected' : '' %>><%= k.namaKepalaKeluarga %> (<%= k.alamat %>)</option>
+        <% }); %>
+      </select>
+    </div>
+    <div class="grup-form">
+      <label for="nama">Nama Balita</label>
+      <input type="text" id="nama" name="nama" required value="<%= balita ? (balita.nama || '') : '' %>" placeholder="Contoh: Ayu Lestari">
+    </div>
+    <div class="baris-form">
+      <div class="grup-form">
+        <label for="tanggalLahir">Tanggal Lahir</label>
+        <input type="date" id="tanggalLahir" name="tanggalLahir" required value="<%= balita ? (balita.tanggalLahir || '') : '' %>">
+      </div>
+      <div class="grup-form">
+        <label for="jenisKelamin">Jenis Kelamin</label>
+        <select id="jenisKelamin" name="jenisKelamin" required>
+          <option value="">Pilih</option>
+          <option value="L" <%= balita && balita.jenisKelamin === 'L' ? 'selected' : '' %>>Laki-laki</option>
+          <option value="P" <%= balita && balita.jenisKelamin === 'P' ? 'selected' : '' %>>Perempuan</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="tombol tombol-primer">Simpan Data Balita</button>
+  </form>
+</div>

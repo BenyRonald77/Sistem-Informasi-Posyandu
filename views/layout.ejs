@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= typeof title !== 'undefined' ? title + ' - Sistem Informasi Posyandu' : 'Sistem Informasi Posyandu' %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="header-app">
+    <div class="container">
+      <a class="merek" href="/">
+        <strong>Sistem Informasi Posyandu</strong>
+        <span>Pencatatan balita &amp; pemantauan tumbuh kembang</span>
+      </a>
+      <nav class="nav-utama" aria-label="Navigasi utama">
+        <a href="/" class="<%= urlSaatIni === '/' ? 'aktif' : '' %>">Dashboard</a>
+        <a href="/keluarga" class="<%= urlSaatIni.startsWith('/keluarga') ? 'aktif' : '' %>">Keluarga</a>
+        <a href="/balita" class="<%= urlSaatIni.startsWith('/balita') ? 'aktif' : '' %>">Balita</a>
+      </nav>
+    </div>
+  </header>
+  <main class="konten">
+    <div class="container">
+      <%- body %>
+    </div>
+  </main>
+  <footer class="teks-muram teks-kecil" style="padding: 24px 0;">
+    <div class="container">
+      Sistem Informasi Posyandu. Data disimpan lokal di berkas JSON, dipakai untuk satu posyandu.
+    </div>
+  </footer>
+</body>
+</html>

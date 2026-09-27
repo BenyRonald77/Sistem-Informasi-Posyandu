@@ -1,0 +1,64 @@
+<a class="tautan-kembali" href="/keluarga/<%= keluarga ? keluarga.id : '' %>">Kembali ke Keluarga <%= keluarga ? keluarga.namaKepalaKeluarga : '' %></a>
+
+<div class="header-halaman">
+  <div class="baris-aksi">
+    <div>
+      <h1><%= balita.nama %></h1>
+      <p class="subjudul">
+        <%= balita.jenisKelamin === 'L' ? 'Laki-laki' : 'Perempuan' %>
+        - Lahir <%= formatTanggal(balita.tanggalLahir) %>
+        - Usia sekarang <%= formatUsiaDariBulan(usiaBulan) %>
+      </p>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap: wrap;">
+      <a class="tombol tombol-luar" href="/balita/<%= balita.id %>/edit">Ubah Data</a>
+      <a class="tombol tombol-primer" href="/balita/<%= balita.id %>/pengukuran/baru">Catat Pengukuran</a>
+    </div>
+  </div>
+</div>
+
+<div class="kartu">
+  <h2>Riwayat Pengukuran</h2>
+  <% if (riwayatPengukuran.length === 0) { %>
+    <div class="state-kosong">
+      <h3>Belum ada riwayat pengukuran</h3>
+      <p class="teks-muram">Catat hasil ukur pertama saat kunjungan posyandu berikutnya.</p>
+      <a class="tombol tombol-primer" href="/balita/<%= balita.id %>/pengukuran/baru">Catat Pengukuran</a>
+    </div>
+  <% } else { %>
+    <div class="pembungkus-tabel">
+      <table class="tabel-data">
+        <thead>
+          <tr>
+            <th>Tanggal Ukur</th>
+            <th class="angka">Berat (kg)</th>
+            <th class="angka">Tinggi (cm)</th>
+            <th class="angka">Lingkar Kepala (cm)</th>
+            <th>Catatan</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% riwayatPengukuran.forEach(function(p) { %>
+            <tr>
+              <td><%= formatTanggal(p.tanggalUkur) %></td>
+              <td class="angka"><%= p.beratKg.toFixed(1) %></td>
+              <td class="angka"><%= p.tinggiCm.toFixed(1) %></td>
+              <td class="angka"><%= p.lingkarKepalaCm ? p.lingkarKepalaCm.toFixed(1) : '-' %></td>
+              <td><%= p.catatan || '-' %></td>
+              <td>
+                <form method="post" action="/balita/<%= balita.id %>/pengukuran/<%= p.id %>/hapus" onsubmit="return confirm('Hapus pengukuran tanggal <%= formatTanggal(p.tanggalUkur) %>?');" style="display:inline;">
+                  <button type="submit" class="tombol tombol-kecil tombol-bahaya">Hapus</button>
+                </form>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
+
+<form method="post" action="/balita/<%= balita.id %>/hapus" onsubmit="return confirm('Yakin hapus data balita ini beserta seluruh riwayat pengukuran dan imunisasinya?');">
+  <button type="submit" class="tombol tombol-bahaya">Hapus Balita</button>
+</form>

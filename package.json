@@ -1,0 +1,17 @@
+{
+  "name": "sistem-informasi-posyandu",
+  "version": "1.0.0",
+  "description": "Sistem Informasi Posyandu - pencatatan balita, grafik pertumbuhan standar WHO, jadwal imunisasi, dan pengingat kader",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node scripts/seed.js",
+    "cron:jalankan-sekali": "node scripts/jalankan-cron-sekali.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1",
+    "node-cron": "^3.0.3"
+  }
+}

@@ -1,0 +1,60 @@
+<a class="tautan-kembali" href="/keluarga">Kembali ke Data Keluarga</a>
+
+<div class="header-halaman">
+  <div class="baris-aksi">
+    <div>
+      <h1><%= keluarga.namaKepalaKeluarga %></h1>
+      <p class="subjudul"><%= keluarga.alamat %><%= keluarga.rtRw ? ' - RT/RW ' + keluarga.rtRw : '' %></p>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <a class="tombol tombol-luar" href="/keluarga/<%= keluarga.id %>/edit">Ubah Data</a>
+      <a class="tombol tombol-primer" href="/balita/baru?keluargaId=<%= keluarga.id %>">Tambah Balita</a>
+    </div>
+  </div>
+</div>
+
+<% if (typeof errorHapus !== 'undefined') { %>
+  <div class="state-galat" role="alert">
+    <h3>Tidak bisa menghapus</h3>
+    <p><%= errorHapus %></p>
+  </div>
+<% } %>
+
+<div class="kartu">
+  <h2>Informasi Keluarga</h2>
+  <p><strong>Status:</strong> <%= keluarga.aktif !== false ? 'Aktif' : 'Tidak aktif' %></p>
+  <p><strong>Nomor HP (catatan kader):</strong> <%= keluarga.noHp || '-' %></p>
+  <p class="teks-muram teks-kecil">Terdaftar sejak <%= formatTanggal(keluarga.createdAt) %></p>
+</div>
+
+<div class="kartu">
+  <h2>Balita dalam Keluarga Ini</h2>
+  <% if (daftarBalita.length === 0) { %>
+    <div class="state-kosong">
+      <h3>Belum ada balita terdaftar untuk keluarga ini</h3>
+      <a class="tombol tombol-primer" href="/balita/baru?keluargaId=<%= keluarga.id %>">Tambah Balita</a>
+    </div>
+  <% } else { %>
+    <div class="pembungkus-tabel">
+      <table class="tabel-data">
+        <thead>
+          <tr><th>Nama</th><th>Tanggal Lahir</th><th>Jenis Kelamin</th><th></th></tr>
+        </thead>
+        <tbody>
+          <% daftarBalita.forEach(function(b) { %>
+            <tr>
+              <td><%= b.nama %></td>
+              <td><%= formatTanggal(b.tanggalLahir) %></td>
+              <td><%= b.jenisKelamin === 'L' ? 'Laki-laki' : 'Perempuan' %></td>
+              <td><a href="/balita/<%= b.id %>">Lihat detail</a></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
+
+<form method="post" action="/keluarga/<%= keluarga.id %>/hapus" onsubmit="return confirm('Yakin hapus data keluarga ini? Tindakan ini tidak bisa dibatalkan.');">
+  <button type="submit" class="tombol tombol-bahaya">Hapus Keluarga</button>
+</form>

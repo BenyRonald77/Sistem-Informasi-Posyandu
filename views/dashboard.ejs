@@ -1,0 +1,24 @@
+<%- include('partials/motif-kurva') %>
+<div class="header-halaman">
+  <h1>Dashboard</h1>
+  <p class="subjudul">Ringkasan data posyandu.</p>
+</div>
+
+<% if (!adaData) { %>
+  <div class="state-kosong">
+    <h3>Belum ada data keluarga atau balita</h3>
+    <p class="teks-muram">Mulai dengan mendaftarkan keluarga, lalu tambahkan data balitanya.</p>
+    <a class="tombol tombol-primer" href="/keluarga/baru">Daftarkan Keluarga Pertama</a>
+  </div>
+<% } else { %>
+  <div class="grid-dashboard">
+    <div class="kartu-statistik">
+      <span class="angka"><%= jumlahBalita %></span>
+      <span class="label">Balita terdaftar</span>
+    </div>
+    <div class="kartu-statistik">
+      <span class="angka"><%= jumlahKeluarga %></span>
+      <span class="label">Keluarga aktif</span>
+    </div>
+  </div>
+<% } %>

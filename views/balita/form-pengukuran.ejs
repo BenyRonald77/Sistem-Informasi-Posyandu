@@ -1,0 +1,39 @@
+<a class="tautan-kembali" href="/balita/<%= balita.id %>">Kembali ke Detail Balita</a>
+<h1><%= title %></h1>
+
+<% if (errors && errors.length) { %>
+  <div class="state-galat" role="alert">
+    <h3>Pengukuran belum tersimpan</h3>
+    <ul style="text-align:left; margin: 0;">
+      <% errors.forEach(function(e) { %><li><%= e %></li><% }); %>
+    </ul>
+  </div>
+<% } %>
+
+<div class="kartu">
+  <form method="post" action="/balita/<%= balita.id %>/pengukuran">
+    <div class="baris-form">
+      <div class="grup-form">
+        <label for="tanggalUkur">Tanggal Ukur</label>
+        <input type="date" id="tanggalUkur" name="tanggalUkur" required value="<%= nilai.tanggalUkur || '' %>" max="<%= new Date().toISOString().slice(0,10) %>">
+      </div>
+      <div class="grup-form">
+        <label for="beratKg">Berat Badan (kg)</label>
+        <input type="number" step="0.1" min="0" max="40" id="beratKg" name="beratKg" required value="<%= nilai.beratKg || '' %>" placeholder="Contoh: 8.5">
+      </div>
+      <div class="grup-form">
+        <label for="tinggiCm">Panjang/Tinggi Badan (cm)</label>
+        <input type="number" step="0.1" min="0" max="150" id="tinggiCm" name="tinggiCm" required value="<%= nilai.tinggiCm || '' %>" placeholder="Contoh: 68.2">
+      </div>
+      <div class="grup-form">
+        <label for="lingkarKepalaCm">Lingkar Kepala (cm, opsional)</label>
+        <input type="number" step="0.1" min="0" max="60" id="lingkarKepalaCm" name="lingkarKepalaCm" value="<%= nilai.lingkarKepalaCm || '' %>" placeholder="Contoh: 44.0">
+      </div>
+    </div>
+    <div class="grup-form">
+      <label for="catatan">Catatan (opsional)</label>
+      <textarea id="catatan" name="catatan" placeholder="Catatan tambahan dari kader, misal kondisi anak saat diukur"><%= nilai.catatan || '' %></textarea>
+    </div>
+    <button type="submit" class="tombol tombol-primer">Simpan Pengukuran</button>
+  </form>
+</div>

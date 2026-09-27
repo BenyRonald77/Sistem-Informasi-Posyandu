@@ -1,0 +1,45 @@
+<a class="tautan-kembali" href="/keluarga">Kembali ke Data Keluarga</a>
+<h1><%= title %></h1>
+
+<% if (errors && errors.length) { %>
+  <div class="state-galat" role="alert">
+    <h3>Data belum tersimpan</h3>
+    <ul style="text-align:left; margin: 0;">
+      <% errors.forEach(function(e) { %><li><%= e %></li><% }); %>
+    </ul>
+  </div>
+<% } %>
+
+<div class="kartu">
+  <form method="post" action="<%= keluarga && keluarga.id ? '/keluarga/' + keluarga.id : '/keluarga' %>">
+    <div class="grup-form">
+      <label for="namaKepalaKeluarga">Nama Kepala Keluarga</label>
+      <input type="text" id="namaKepalaKeluarga" name="namaKepalaKeluarga" required
+             value="<%= keluarga ? (keluarga.namaKepalaKeluarga || '') : '' %>" placeholder="Contoh: Budi Santoso">
+    </div>
+    <div class="grup-form">
+      <label for="alamat">Alamat</label>
+      <textarea id="alamat" name="alamat" required placeholder="Alamat lengkap tempat tinggal"><%= keluarga ? (keluarga.alamat || '') : '' %></textarea>
+    </div>
+    <div class="baris-form">
+      <div class="grup-form">
+        <label for="rtRw">RT/RW (opsional)</label>
+        <input type="text" id="rtRw" name="rtRw" value="<%= keluarga ? (keluarga.rtRw || '') : '' %>" placeholder="Contoh: 003/005">
+      </div>
+      <div class="grup-form">
+        <label for="noHp">Nomor HP (opsional, catatan kader)</label>
+        <input type="tel" id="noHp" name="noHp" value="<%= keluarga ? (keluarga.noHp || '') : '' %>" placeholder="08xxxxxxxxxx">
+        <div class="bantuan">Dipakai sebagai catatan kader saja, sistem ini tidak mengirim pesan otomatis ke nomor ini.</div>
+      </div>
+    </div>
+    <% if (keluarga && keluarga.id) { %>
+      <div class="grup-form">
+        <label>
+          <input type="checkbox" name="aktif" style="width:auto; min-height:auto; vertical-align:middle;" <%= keluarga.aktif !== false ? 'checked' : '' %>>
+          Keluarga aktif (ikut dihitung dalam pengingat posyandu bulanan)
+        </label>
+      </div>
+    <% } %>
+    <button type="submit" class="tombol tombol-primer">Simpan Data Keluarga</button>
+  </form>
+</div>
