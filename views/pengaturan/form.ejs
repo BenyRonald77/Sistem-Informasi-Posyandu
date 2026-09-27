@@ -1,0 +1,41 @@
+<div class="header-halaman">
+  <h1>Pengaturan Posyandu</h1>
+  <p class="subjudul">Tanggal rutin posyandu bulanan dipakai untuk menghitung pengingat H-3.</p>
+</div>
+
+<% if (tersimpan) { %>
+  <div class="kartu" style="border-left: 4px solid var(--status-sudah); background: var(--status-sudah-bg);">
+    <p class="mb-0">Pengaturan tersimpan.</p>
+  </div>
+<% } %>
+
+<% if (errors && errors.length) { %>
+  <div class="state-galat" role="alert">
+    <h3>Pengaturan belum tersimpan</h3>
+    <ul style="text-align:left; margin: 0;">
+      <% errors.forEach(function(e) { %><li><%= e %></li><% }); %>
+    </ul>
+  </div>
+<% } %>
+
+<div class="kartu">
+  <form method="post" action="/pengaturan">
+    <div class="baris-form">
+      <div class="grup-form">
+        <label for="namaPosyandu">Nama / Lokasi Posyandu</label>
+        <input type="text" id="namaPosyandu" name="namaPosyandu" required value="<%= pengaturan.namaPosyandu || '' %>" placeholder="Contoh: Posyandu Melati RW 05">
+      </div>
+      <div class="grup-form">
+        <label for="tanggalRutinPosyandu">Tanggal Rutin Tiap Bulan</label>
+        <input type="number" id="tanggalRutinPosyandu" name="tanggalRutinPosyandu" min="1" max="28" required value="<%= pengaturan.tanggalRutinPosyandu || '' %>" placeholder="Contoh: 10">
+        <div class="bantuan">Diisi angka 1-28 supaya berlaku konsisten di setiap bulan. Contoh: 10 berarti "posyandu tiap tanggal 10".</div>
+      </div>
+    </div>
+    <button type="submit" class="tombol tombol-primer">Simpan Pengaturan</button>
+  </form>
+</div>
+
+<div class="catatan-sumber">
+  <strong>Bagaimana pengingat dihitung:</strong>
+  <p class="mb-0">Job pengingat harian memeriksa apakah hari ini tepat 3 hari sebelum tanggal rutin posyandu bulan ini/bulan depan. Jika ya, satu catatan pengingat dibuat untuk tiap keluarga aktif. Lihat halaman "Pengingat" untuk daftarnya, dan jalankan <code>npm run cron:jalankan-sekali</code> untuk menguji tanpa menunggu jadwal harian.</p>
+</div>

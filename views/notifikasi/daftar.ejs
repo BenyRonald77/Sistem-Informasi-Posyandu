@@ -1,0 +1,38 @@
+<div class="header-halaman">
+  <div class="baris-aksi">
+    <div>
+      <h1>Pengingat untuk Orang Tua</h1>
+      <p class="subjudul">Catatan pengingat posyandu bulanan dan imunisasi yang jatuh tempo.</p>
+    </div>
+    <form method="post" action="/notifikasi/jalankan-sekarang">
+      <button type="submit" class="tombol tombol-luar">Periksa Pengingat Sekarang</button>
+    </form>
+  </div>
+</div>
+
+<div class="catatan-sumber">
+  <strong>Catatan penting:</strong>
+  <p class="mb-0">Pengingat di bawah ini adalah catatan in-app, BUKAN pesan yang otomatis terkirim ke HP orang tua. Sistem ini tidak terhubung ke layanan SMS/WhatsApp/email apa pun. Kader perlu menyampaikan pengingat ini secara manual: dicetak, ditunjukkan langsung, atau dibacakan saat bertemu keluarga terkait.</p>
+</div>
+
+<% if (daftar.length === 0) { %>
+  <div class="state-kosong">
+    <h3>Belum ada pengingat</h3>
+    <p class="teks-muram">Pengingat dibuat otomatis setiap hari (H-3 posyandu bulanan, dan imunisasi jatuh tempo dalam 14 hari). Klik "Periksa Pengingat Sekarang" untuk membuat pengingat berdasarkan data saat ini tanpa menunggu jadwal harian.</p>
+  </div>
+<% } else { %>
+  <% daftar.forEach(function(n) { %>
+    <div class="kartu-notifikasi <%= n.sudahDibaca ? 'dibaca' : '' %>">
+      <div class="isi">
+        <strong><%= n.judul %></strong>
+        <p class="mb-0"><%= n.pesan %></p>
+        <span class="waktu">Dibuat <%= formatTanggalWaktu(n.tanggalDibuat) %><%= n.sudahDibaca ? ' - sudah dibaca' : '' %></span>
+      </div>
+      <% if (!n.sudahDibaca) { %>
+        <form method="post" action="/notifikasi/<%= n.id %>/tandai-dibaca">
+          <button type="submit" class="tombol tombol-kecil tombol-luar">Tandai Dibaca</button>
+        </form>
+      <% } %>
+    </div>
+  <% }); %>
+<% } %>

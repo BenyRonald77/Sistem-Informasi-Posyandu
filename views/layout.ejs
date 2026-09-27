@@ -17,6 +17,13 @@
         <a href="/" class="<%= urlSaatIni === '/' ? 'aktif' : '' %>">Dashboard</a>
         <a href="/keluarga" class="<%= urlSaatIni.startsWith('/keluarga') ? 'aktif' : '' %>">Keluarga</a>
         <a href="/balita" class="<%= urlSaatIni.startsWith('/balita') ? 'aktif' : '' %>">Balita</a>
+        <a href="/notifikasi" class="<%= urlSaatIni.startsWith('/notifikasi') ? 'aktif' : '' %>">
+          Pengingat
+          <% if (jumlahNotifikasiBelumDibaca > 0) { %>
+            <span class="lencana-notif"><%= jumlahNotifikasiBelumDibaca %></span>
+          <% } %>
+        </a>
+        <a href="/pengaturan" class="<%= urlSaatIni.startsWith('/pengaturan') ? 'aktif' : '' %>">Pengaturan</a>
       </nav>
     </div>
   </header>

@@ -20,9 +20,33 @@
       <span class="angka"><%= jumlahKeluarga %></span>
       <span class="label">Keluarga aktif</span>
     </div>
+    <div class="kartu-statistik aksen">
+      <span class="angka"><%= jumlahNotifBelumDibaca %></span>
+      <span class="label">Pengingat belum dibaca</span>
+    </div>
     <div class="kartu-statistik <%= jumlahBalitaTerlambatImunisasi > 0 ? 'aksen' : '' %>">
       <span class="angka"><%= jumlahBalitaTerlambatImunisasi %></span>
       <span class="label">Balita dengan imunisasi terlambat</span>
     </div>
+  </div>
+
+  <div class="kartu">
+    <div class="flex-antara">
+      <h2 class="mb-0">Pengingat terbaru</h2>
+      <a href="/notifikasi">Lihat semua pengingat</a>
+    </div>
+    <% if (notifikasiTerbaru.length === 0) { %>
+      <p class="teks-muram">Belum ada pengingat yang dibuat. Pengingat dibuat otomatis oleh job harian, atau jalankan <code>npm run cron:jalankan-sekali</code> untuk membuat pengingat sekarang.</p>
+    <% } else { %>
+      <% notifikasiTerbaru.forEach(function(n) { %>
+        <div class="kartu-notifikasi <%= n.sudahDibaca ? 'dibaca' : '' %>">
+          <div class="isi">
+            <strong><%= n.judul %></strong>
+            <p class="mb-0 teks-kecil"><%= n.pesan %></p>
+          </div>
+          <span class="waktu"><%= formatTanggalWaktu(n.tanggalDibuat) %></span>
+        </div>
+      <% }); %>
+    <% } %>
   </div>
 <% } %>
