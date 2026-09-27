@@ -1,0 +1,44 @@
+<a class="tautan-kembali" href="/balita/<%= balita.id %>">Kembali ke Detail Balita</a>
+
+<div class="header-halaman">
+  <h1>Grafik Pertumbuhan - <%= balita.nama %></h1>
+  <p class="subjudul">Berat dan tinggi/panjang badan dibandingkan pita rujukan standar pertumbuhan WHO (<%= balita.jenisKelamin === 'L' ? 'anak laki-laki' : 'anak perempuan' %>).</p>
+</div>
+
+<div class="catatan-sumber">
+  <strong>Catatan sumber dan keterbatasan data:</strong>
+  <p class="mb-0"><%= catatanSumber %></p>
+</div>
+
+<% if (jumlahPengukuran === 0) { %>
+  <div class="state-kosong">
+    <h3>Belum ada data pengukuran untuk balita ini</h3>
+    <p class="teks-muram">Grafik kurva rujukan WHO tetap bisa ditampilkan, tetapi titik pertumbuhan anak baru muncul setelah ada pengukuran tersimpan.</p>
+    <a class="tombol tombol-primer" href="/balita/<%= balita.id %>/pengukuran/baru">Catat Pengukuran Pertama</a>
+  </div>
+<% } %>
+
+<div id="area-grafik">
+  <div class="state-loading" id="status-loading">
+    <span class="pemintal" aria-hidden="true"></span>
+    <span>Memuat data grafik...</span>
+  </div>
+  <div class="state-galat" id="status-galat" style="display:none;" role="alert">
+    <h3>Gagal memuat data grafik</h3>
+    <p id="pesan-galat" class="mb-0">Terjadi kesalahan saat mengambil data.</p>
+    <button class="tombol tombol-luar" id="tombol-coba-lagi" type="button">Coba Lagi</button>
+  </div>
+  <div id="wadah-chart" style="display:none;">
+    <div class="kartu">
+      <h2>Berat Badan menurut Usia (kg)</h2>
+      <canvas id="chartBerat" role="img" aria-label="Grafik berat badan menurut usia dibandingkan rujukan WHO" height="120"></canvas>
+    </div>
+    <div class="kartu">
+      <h2>Tinggi/Panjang Badan menurut Usia (cm)</h2>
+      <canvas id="chartTinggi" role="img" aria-label="Grafik tinggi badan menurut usia dibandingkan rujukan WHO" height="120"></canvas>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="/js/grafik.js" data-balita-id="<%= balita.id %>"></script>
